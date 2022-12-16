@@ -22,6 +22,13 @@ section.hero {
   background-color: #f8f8f8;
 }
 
+section.cart {
+  background-color: #f8f8f8;
+}
+section.cart .amount {
+  color: #fe5f1e;
+}
+
 .size {
   background-color: #f8f8f8;
 }
@@ -35,4 +42,23 @@ section.hero {
   background-color: #fe5f1e;
   border-color: #fff;
   color: #fff;
+}
+
+.btn-primary {
+  background-color: #fe5f1e !important;
+  transition: all 0.3s ease-in-out;
+}
+.btn-primary:hover {
+  background-color: #b23301 !important;
+}
+
+section.login {
+  background-color: #f8f8f8;
+  min-height: 100vh;
+}
+section.login a {
+  color: #fe5f1e;
+}
+section.login a:hover {
+  color: #b23301;
 }

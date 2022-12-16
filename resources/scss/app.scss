@@ -24,6 +24,12 @@ section.hero {
   background-color: $secondary;
 }
 
+section.cart {
+  background-color: $secondary;
+  .amount {
+    color: $primary;
+  }
+}
 .size {
   background-color: $secondary;
 }
@@ -36,5 +42,24 @@ section.hero {
     background-color: $primary;
     border-color: $pure;
     color: $pure;
+  }
+}
+
+.btn-primary {
+  background-color: $primary !important;
+  transition: $smooth;
+  &:hover {
+    background-color: $primary-hover !important;
+  }
+}
+
+section.login {
+  background-color: $secondary;
+  min-height: 100vh;
+  a {
+    color: $primary;
+    &:hover {
+      color: $primary-hover;
+    }
   }
 }
