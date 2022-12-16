@@ -5,8 +5,9 @@ const homeController = require("../app/http/controllers/homeController");
 const router = express.Router();
 
 router.route("/").get(homeController().index);
-router.route("/cart").get(cartController().cart);
 router.route("/login").get(authController().login);
 router.route("/register").get(authController().register);
+router.route("/cart").get(cartController().index);
+router.route("/update-cart").post(cartController().update);
 
 module.exports = router;
