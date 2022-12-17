@@ -29,6 +29,7 @@ router.route("/update-cart").post(cartController().update);
 // Protected  Routes
 router.route("/orders").post(auth, orderController().store);
 router.route("/customer/orders").get(auth, orderController().index);
+router.route("/customer/orders/:id").get(auth, orderController().show);
 
 // Admin Routes
 router.route("/admin/orders").get(admin, adminOrderController().index);

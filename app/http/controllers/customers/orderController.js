@@ -38,6 +38,22 @@ const orderController = () => {
           return res.redirect("/cart");
         });
     },
+    async show(req, res) {
+      try {
+        const order = await Order.findById(req.params.id);
+        if (order) {
+          if (req.user._id.toString() === order.customerId.toString()) {
+            res.render("customers/singleOrder", { order: order });
+          } else {
+            res.send("404 not found");
+          }
+        } else {
+          res.send("404 not found");
+        }
+      } catch (err) {
+        res.send("404 not found");
+      }
+    },
   };
 };
 
