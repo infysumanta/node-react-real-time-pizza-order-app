@@ -6,8 +6,9 @@ const path = require("path");
 const config = require("./app/config");
 const flash = require("express-flash");
 const MongoStore = require("connect-mongo");
-
+const passport = require("passport");
 const app = express();
+const passportInit = require("./app/config/passport");
 
 app.use(
   session({
@@ -23,15 +24,22 @@ app.use(
 );
 app.use(flash());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "resources", "views"));
-app.use((req, res, next) => {
-  res.locals.session = req.session;
-  next();
-});
+
 app.use(expressLayout);
 app.use(express.static(path.join(__dirname, "public")));
 
+// passport connfig
+app.use(passport.initialize());
+app.use(passport.session());
+passportInit(passport);
+app.use((req, res, next) => {
+  res.locals.session = req.session;
+  res.locals.user = req.user;
+  next();
+});
 app.use("/", require("./routes/web"));
 
 module.exports = app;
