@@ -41,6 +41,12 @@ addToCart.forEach(function (btn) {
     updateCart(pizza);
   });
 });
+var alertMsg = document.getElementById("success-alert");
+if (alertMsg) {
+  setTimeout(function () {
+    alertMsg.remove();
+  }, 2000);
+}
 
 /***/ }),
 

@@ -1,9 +1,14 @@
 const express = require("express");
 const authController = require("../app/http/controllers/authController");
 const cartController = require("../app/http/controllers/customers/cartController");
+const orderController = require("../app/http/controllers/customers/orderController");
 const homeController = require("../app/http/controllers/homeController");
-const router = express.Router();
 const guest = require("./../app/http/middleware/guest");
+const auth = require("./../app/http/middleware/auth");
+const adminOrderController = require("../app/http/controllers/admin/adminOrderController");
+
+const router = express.Router();
+
 router.route("/").get(homeController().index);
 router
   .route("/login")
@@ -18,5 +23,12 @@ router.route("/logout").post(authController().logout);
 
 router.route("/cart").get(cartController().index);
 router.route("/update-cart").post(cartController().update);
+
+// Protected  Routes
+router.route("/orders").post(auth, orderController().store);
+router.route("/customer/orders").get(auth, orderController().index);
+
+// Admin Routes
+router.ger("/admin/orders").get(auth, adminOrderController().index);
 
 module.exports = router;

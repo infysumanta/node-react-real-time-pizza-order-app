@@ -33,3 +33,11 @@ addToCart.forEach((btn) => {
     updateCart(pizza);
   });
 });
+
+const alertMsg = document.getElementById("success-alert");
+
+if (alertMsg) {
+  setTimeout(() => {
+    alertMsg.remove();
+  }, 2000);
+}
