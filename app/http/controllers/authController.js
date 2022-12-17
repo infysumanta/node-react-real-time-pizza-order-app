@@ -2,6 +2,10 @@ const User = require("./../../models/user.schema");
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const authController = () => {
+  const _getRedirectUrl = (req) => {
+    return req.user.role === "admin" ? "/admin/orders" : "customer/orders";
+  };
+
   return {
     login(req, res) {
       res.render("auth/login");
@@ -29,7 +33,7 @@ const authController = () => {
             return next(err);
           }
 
-          return res.redirect("/");
+          return res.redirect(_getRedirectUrl(req));
         });
       })(req, res, next);
     },

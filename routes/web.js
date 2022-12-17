@@ -5,6 +5,7 @@ const orderController = require("../app/http/controllers/customers/orderControll
 const homeController = require("../app/http/controllers/homeController");
 const guest = require("./../app/http/middleware/guest");
 const auth = require("./../app/http/middleware/auth");
+const admin = require("./../app/http/middleware/admin");
 const adminOrderController = require("../app/http/controllers/admin/adminOrderController");
 
 const router = express.Router();
@@ -29,6 +30,6 @@ router.route("/orders").post(auth, orderController().store);
 router.route("/customer/orders").get(auth, orderController().index);
 
 // Admin Routes
-router.ger("/admin/orders").get(auth, adminOrderController().index);
+router.route("/admin/orders").get(admin, adminOrderController().index);
 
 module.exports = router;
