@@ -7,6 +7,7 @@ const guest = require("./../app/http/middleware/guest");
 const auth = require("./../app/http/middleware/auth");
 const admin = require("./../app/http/middleware/admin");
 const adminOrderController = require("../app/http/controllers/admin/adminOrderController");
+const adminStatusController = require("../app/http/controllers/admin/adminStatusController");
 
 const router = express.Router();
 
@@ -31,5 +32,6 @@ router.route("/customer/orders").get(auth, orderController().index);
 
 // Admin Routes
 router.route("/admin/orders").get(admin, adminOrderController().index);
+router.route("/admin/order/status").post(admin, adminStatusController().update);
 
 module.exports = router;
