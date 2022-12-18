@@ -142,7 +142,10 @@ var socket = io();
 if (order) {
   socket.emit("join", "order_".concat(order._id));
 }
-(0,_admin__WEBPACK_IMPORTED_MODULE_1__["default"])();
+var adminAreaPath = window.location.pathname;
+if (adminAreaPath.includes("admin")) {
+  (0,_admin__WEBPACK_IMPORTED_MODULE_1__["default"])();
+}
 socket.on("orderUpdated", function (data) {
   var updatedOrder = _objectSpread({}, order);
   updatedOrder.updatedAt = moment__WEBPACK_IMPORTED_MODULE_2___default()().format();

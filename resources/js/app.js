@@ -78,8 +78,11 @@ if (order) {
   socket.emit("join", `order_${order._id}`);
 }
 
-initAdmin();
+let adminAreaPath = window.location.pathname;
 
+if (adminAreaPath.includes("admin")) {
+  initAdmin();
+}
 socket.on("orderUpdated", (data) => {
   const updatedOrder = { ...order };
   updatedOrder.updatedAt = moment().format();
