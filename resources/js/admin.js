@@ -2,7 +2,8 @@ import axios from "axios";
 import moment from "moment";
 import Noty from "noty";
 
-const initAdmin = () => {
+const initAdmin = (socket) => {
+  console.log(socket);
   const orderTableBody = document.getElementById("orderTableBody");
   let orders = [];
   let markup;

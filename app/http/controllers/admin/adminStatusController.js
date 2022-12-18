@@ -7,6 +7,13 @@ const adminStatusController = () => {
         { _id: req.body.orderId },
         { status: req.body.status },
         (err, data) => {
+          // Emit Event
+          const eventEmitter = req.app.get("eventEmitter");
+          eventEmitter.emit("orderUpdated", {
+            id: req.body.orderId,
+            status: req.body.status,
+          });
+
           res.redirect("/admin/orders");
         }
       );

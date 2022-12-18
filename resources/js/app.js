@@ -43,14 +43,16 @@ if (alertMsg) {
   }, 2000);
 }
 
-initAdmin();
-
 let statuses = document.querySelectorAll(".status_line");
 let hiddenInput = document.getElementById("hiddenInput");
 let order = hiddenInput ? hiddenInput.value : null;
 let time = document.createElement("small");
 order = JSON.parse(order);
 function updateStatus(order) {
+  statuses.forEach((status) => {
+    status.classList.remove("step-completed");
+    status.classList.remove("current");
+  });
   let stepComplete = true;
   statuses.forEach((status) => {
     let dataProp = status.dataset.status;
@@ -68,3 +70,26 @@ function updateStatus(order) {
   });
 }
 updateStatus(order);
+
+// Socket
+let socket = io();
+
+if (order) {
+  socket.emit("join", `order_${order._id}`);
+}
+
+initAdmin();
+
+socket.on("orderUpdated", (data) => {
+  const updatedOrder = { ...order };
+  updatedOrder.updatedAt = moment().format();
+  updatedOrder.status = data.status;
+  console.log(data);
+  updateStatus(updatedOrder);
+  new Noty({
+    type: "success",
+    timeout: 1000,
+    text: "Order Status Updated",
+    progressBar: false,
+  }).show();
+});
