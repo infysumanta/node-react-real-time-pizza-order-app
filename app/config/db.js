@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const config = require(".");
 const connectDB = async () => {
+  mongoose.set("strictQuery", true);
   await mongoose
     .connect(config.MONGO_URI, {
       useNewUrlParser: true,
