@@ -8,7 +8,7 @@ const auth = require("./../app/http/middleware/auth");
 const admin = require("./../app/http/middleware/admin");
 const adminOrderController = require("../app/http/controllers/admin/adminOrderController");
 const adminStatusController = require("../app/http/controllers/admin/adminStatusController");
-
+const { upload } = require("./../app/config/fileUtils");
 const router = express.Router();
 
 router.route("/").get(homeController().index);
@@ -39,6 +39,12 @@ router
   .get(admin, adminOrderController().usersStatus);
 
 router.route("/admin/menus").get(admin, adminOrderController().menus);
+router
+  .route("/admin/menus/create")
+  .get(admin, adminOrderController().createMenu);
+router
+  .route("/admin/menus/save")
+  .post(admin, upload.single("image"), adminOrderController().saveMenu);
 router.route("/admin/orders").get(admin, adminOrderController().order);
 router.route("/admin/order/status").post(admin, adminStatusController().update);
 

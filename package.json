@@ -35,7 +35,9 @@
     "noty": "^3.2.0-beta-deprecated",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
-    "socket.io": "^4.5.4"
+    "socket.io": "^4.5.4",
+    "multer": "^1.4.5-lts.1",
+    "uuid": "3.4.0"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",

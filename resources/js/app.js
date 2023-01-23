@@ -4,6 +4,7 @@ import initAdmin from "./admin";
 import moment from "moment";
 let addToCart = document.querySelectorAll(".add-to-cart");
 let cartCounter = document.getElementById("cartCounter");
+let createMenu = document.getElementById("createMenu");
 const updateCart = (pizza) => {
   axios
     .post("/update-cart", pizza)
@@ -96,3 +97,5 @@ socket.on("orderUpdated", (data) => {
     progressBar: false,
   }).show();
 });
+
+createMenu.addEventListener("click", (e) => {});

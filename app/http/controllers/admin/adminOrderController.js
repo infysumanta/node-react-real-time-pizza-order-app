@@ -14,21 +14,33 @@ const adminOrderController = () => {
       };
       return res.render("admin/index", total);
     },
-    async menus(req, res) {
-      const menus = await Menu.find();
-      return res.render("admin/menus", { menus });
-    },
     async users(req, res) {
       const users = await User.find();
       return res.render("admin/users", { users });
     },
-
     async usersStatus(req, res) {
       const { userId } = req.params;
       const user = await User.findById(userId);
       user.active = !user.active;
       user.save();
       res.redirect("/admin/users");
+    },
+    async menus(req, res) {
+      const menus = await Menu.find();
+      return res.render("admin/menus", { menus });
+    },
+    async createMenu(req, res) {
+      return res.render("admin/createMenu");
+    },
+    async saveMenu(req, res) {
+      const menu = new Menu({
+        name: req.body.name,
+        price: req.body.price,
+        size: req.body.size,
+        image: req.file.filename,
+      });
+      await menu.save();
+      res.redirect("/admin/menus");
     },
     async order(req, res) {
       const orders = await Order.find({ status: { $ne: "completed" } }, null, {

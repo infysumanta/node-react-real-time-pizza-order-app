@@ -102,3 +102,8 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Remove Upload directory
+public/upload/*.png
+public/upload/*.jpg
+public/upload/*.jpeg
