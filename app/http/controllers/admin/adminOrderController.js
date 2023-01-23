@@ -1,6 +1,8 @@
 const Order = require("./../../../models/order.schema");
 const User = require("./../../../models/user.schema");
 const Menu = require("./../../../models/menu.schema");
+var fs = require("fs");
+var path = require("path");
 const adminOrderController = () => {
   return {
     async index(req, res) {
@@ -41,6 +43,45 @@ const adminOrderController = () => {
       });
       await menu.save();
       res.redirect("/admin/menus");
+    },
+    async editMenu(req, res) {
+      const { menuId } = req.params;
+      const menu = await Menu.findById(menuId);
+      return res.render("admin/editMenu", { menu });
+    },
+    async updateMenu(req, res) {
+      try {
+        const { menuId } = req.params;
+        console.log("sss", req.body);
+        const menu = await Menu.findById(menuId);
+        menu.name = req.body.name;
+        menu.price = req.body.price;
+        menu.size = req.body.size;
+        if (req?.file?.filename) {
+          menu.image = req.file.filename;
+        }
+        await menu.save();
+      } catch (err) {
+        console.log(err);
+      } finally {
+        res.redirect("/admin/menus");
+      }
+    },
+    async deleteMenu(req, res) {
+      try {
+        const { menuId } = req.params;
+        const menu = await Menu.findByIdAndDelete(menuId);
+        const filePath = path.join(
+          __dirname,
+          "/../../../../public/upload",
+          menu.image
+        );
+        fs.unlinkSync(filePath);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        res.redirect("/admin/menus");
+      }
     },
     async order(req, res) {
       const orders = await Order.find({ status: { $ne: "completed" } }, null, {
