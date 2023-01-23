@@ -22,6 +22,14 @@ const adminOrderController = () => {
       const users = await User.find();
       return res.render("admin/users", { users });
     },
+
+    async usersStatus(req, res) {
+      const { userId } = req.params;
+      const user = await User.findById(userId);
+      user.active = !user.active;
+      user.save();
+      res.redirect("/admin/users");
+    },
     async order(req, res) {
       const orders = await Order.find({ status: { $ne: "completed" } }, null, {
         sort: { createdAt: -1 },

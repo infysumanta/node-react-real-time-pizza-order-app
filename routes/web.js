@@ -34,6 +34,10 @@ router.route("/customer/orders/:id").get(auth, orderController().show);
 // Admin Routes
 router.route("/admin").get(admin, adminOrderController().index);
 router.route("/admin/users").get(admin, adminOrderController().users);
+router
+  .route("/admin/users/:userId/status")
+  .get(admin, adminOrderController().usersStatus);
+
 router.route("/admin/menus").get(admin, adminOrderController().menus);
 router.route("/admin/orders").get(admin, adminOrderController().order);
 router.route("/admin/order/status").post(admin, adminStatusController().update);
