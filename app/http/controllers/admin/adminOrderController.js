@@ -1,6 +1,8 @@
 const Order = require("./../../../models/order.schema");
 const User = require("./../../../models/user.schema");
 const Menu = require("./../../../models/menu.schema");
+var fs = require("fs");
+var path = require("path");
 const adminOrderController = () => {
   return {
     async index(req, res) {
@@ -41,6 +43,25 @@ const adminOrderController = () => {
       });
       await menu.save();
       res.redirect("/admin/menus");
+    },
+    async editMenu(req, res) {
+      const { menuId } = req.params;
+    },
+    async deleteMenu(req, res) {
+      try {
+        const { menuId } = req.params;
+        const menu = await Menu.findByIdAndDelete(menuId);
+        const filePath = path.join(
+          __dirname,
+          "/../../../../public/upload",
+          menu.image
+        );
+        fs.unlinkSync(filePath);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        res.redirect("/admin/menus");
+      }
     },
     async order(req, res) {
       const orders = await Order.find({ status: { $ne: "completed" } }, null, {

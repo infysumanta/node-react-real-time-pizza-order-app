@@ -39,6 +39,8 @@ router
   .get(admin, adminOrderController().usersStatus);
 
 router.route("/admin/menus").get(admin, adminOrderController().menus);
+router.route("/admin/menus/:menuId/edit").get(admin, adminOrderController().editMenu);
+router.route("/admin/menus/:menuId/delete").get(admin, adminOrderController().deleteMenu);
 router
   .route("/admin/menus/create")
   .get(admin, adminOrderController().createMenu);
