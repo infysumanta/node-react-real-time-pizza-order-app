@@ -35,6 +35,10 @@
           <li class="ml-6"><a href="/login">Login</a></li>
           <% }else{ %>
 
+          <li class="ml-6"><a href="/customer/orders">Order</a></li>
+          <% if(user.role == "admin"){ %>
+          <li class="ml-6"><a href="/admin">Admin Dashboard</a></li>
+          <% } %>
           <li class="ml-6">
             <form action="/logout" method="post" id="logout">
               <a href="#" onclick="document.getElementById('logout').submit()"
@@ -58,6 +62,12 @@
     </nav>
 
     <%- body %>
+    <footer
+      class="container mx-auto flex items-center justify-between py-4 text-gray-500"
+    >
+      &copy; <%= new Date().getFullYear() %> All Right Reserved, Real Time
+      Pizza.
+    </footer>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/app.js"></script>
   </body>
