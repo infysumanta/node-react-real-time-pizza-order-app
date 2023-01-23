@@ -32,7 +32,8 @@ router.route("/customer/orders").get(auth, orderController().index);
 router.route("/customer/orders/:id").get(auth, orderController().show);
 
 // Admin Routes
-router.route("/admin/orders").get(admin, adminOrderController().index);
+router.route("/admin").get(admin, adminOrderController().index);
+router.route("/admin/orders").get(admin, adminOrderController().order);
 router.route("/admin/order/status").post(admin, adminStatusController().update);
 
 module.exports = router;
