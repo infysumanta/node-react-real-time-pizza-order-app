@@ -24,7 +24,7 @@
       <tbody>
         <% menus.forEach((menu, index)=>{%>
         <tr>
-          <td class="border px-4 py-2"><%= index %></td>
+          <td class="border px-4 py-2"><%= Number(index)+1 %></td>
           <td class="border px-4 py-2"><%= menu.name %></td>
           <td class="border px-4 py-2">
             <img src="/upload/<%= menu.image %>" width="50px" />
