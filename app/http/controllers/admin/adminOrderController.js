@@ -14,11 +14,13 @@ const adminOrderController = () => {
       };
       return res.render("admin/index", total);
     },
-    async products(req, res) {
-      return res.render("admin/index");
+    async menus(req, res) {
+      const menus = await Menu.find();
+      return res.render("admin/menus", { menus });
     },
     async users(req, res) {
-      return res.render("admin/index");
+      const users = await User.find();
+      return res.render("admin/users", { users });
     },
     async order(req, res) {
       const orders = await Order.find({ status: { $ne: "completed" } }, null, {
