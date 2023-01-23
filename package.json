@@ -1,7 +1,7 @@
 {
   "name": "react-real-time-pizza-order-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "Its a Pizza order apps user can order Pizza and see the status and admin can add items see and update it and upload the image and change the order status too, and can see user list and block the user",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
